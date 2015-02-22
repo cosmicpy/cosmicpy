@@ -29,7 +29,7 @@ We create a survey following these parameters in cosmicpy using:
     :okwarning:
 
     @suppress
-    In [0]: from pylab import *;
+    In [0]: import matplotlib; matplotlib.use('Agg'); from pylab import *;
 
     In [1]: from cosmicpy import *
 

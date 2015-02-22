@@ -23,7 +23,7 @@ We define 2 such surveys, one shallow with :math:`r_0 = 100 \quad h^{-1}` Mpc an
     :okwarning:
 
     @suppress
-    In [0]: from pylab import *;
+    In [0]: import matplotlib; matplotlib.use('Agg');from pylab import *;
 
     In [1]: from cosmicpy import *
 

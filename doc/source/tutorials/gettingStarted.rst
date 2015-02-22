@@ -17,7 +17,7 @@ Once :program:`ipython` is running, you can import the cosmicpy package:
 .. ipython::
 
     @suppress
-    In [0]: from pylab import *;
+    In [0]: import matplotlib; matplotlib.use('Agg'); from pylab import *;
 
     In [1]: from cosmicpy import *
 
