@@ -2,16 +2,24 @@ language: python
 python:
   - "2.7"
 
-before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq cmake libgsl0-dev python-numpy python-scipy python-matplotlib
-
-# command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
+# command to install dependencies
 install: 
+  - wget http://repo.continuum.io/miniconda/Miniconda-3.4.2-Linux-x86_64.sh -O miniconda.sh
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda conda update -q conda
+  - conda info -a
+  - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION pip
+  - source activate test-environment
+  - conda install --yes numpy=1.9
+  - conda install --yes scipy matplotlib Sphinx=1.2.2 Pygments    
   - pip install sphinx-bootstrap-theme sphinxcontrib-napoleon sphinxcontrib-bibtex
+
+  - python setup.py install
 
 # command to run tests, e.g. python setup.py test
 script:
-  - python setup.py build 
   - cd doc
   - make 
