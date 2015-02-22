@@ -23,6 +23,7 @@ ExternalProject_Add(Boost
                                                         link=static
                                                         cxxflags='-fPIC'
                                                         --prefix=${CMAKE_BINARY_DIR}/extern
+                                                        -d 0
                                                         -j8
     INSTALL_COMMAND ""
     BUILD_IN_SOURCE 1
