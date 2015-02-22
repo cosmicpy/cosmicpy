@@ -2,8 +2,12 @@ language: python
 python:
   - "2.7"
 
+before_install:
+ - sudo apt-get update -qq
+ - sudo apt-get install -qq cmake libboost-all-dev gsl ipython python-numpy python-scipy matplotlib
+
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
-install: pip install numpy scipy matplotlib --use-mirrors
+# install: 
 
 # command to run tests, e.g. python setup.py test
 script:  python setup.py build
