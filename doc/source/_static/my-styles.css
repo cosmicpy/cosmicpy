@@ -1,0 +1,17 @@
+
+dl.class > dt { background-color: #D5D9FF; }
+dl.class > dt:target { background-color: #fcebb6; }
+dl.function > dt { background-color: #DAE4FF; }
+dl.function > dt:target { background-color: #fcebb6; }
+dl.method > dt { background-color: #DAE4FF; }
+dl.method > dt:target { background-color: #fcebb6; }
+dl.attribute > dt { background-color: #DAE4FF; }
+dl.attribute > dt:target { background-color: #fcebb6; }
+
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a{
+    color: #D0D0D0 ;
+}
+
+.navbar-inverse .navbar-text {
+    color: #FFFFFF ;
+}
