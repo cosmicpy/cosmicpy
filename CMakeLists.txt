@@ -2,41 +2,31 @@
 # Licensed under CeCILL 2.1 - see LICENSE.rst
 cmake_minimum_required(VERSION 2.8)
 
-include(ExternalProject)
-include(FindPkgConfig)
-
 # Adding customized cmake module
 list(APPEND CMAKE_MODULE_PATH  "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+
+include(ExternalProject)
+include(FindPkgConfig)
 
 project(cosmicpy)
 
 # Find required packages
-find_package(Boost REQUIRED COMPONENTS math_tr1 python)
 find_package(PythonInterp REQUIRED)
 find_package(PythonLibsNew REQUIRED)
-
 pkg_check_modules(GSL REQUIRED gsl)
 
-# Downloads and compiles the Boost.NumPy package
-# The library and include files are located in the build/extern directory
-ExternalProject_Add(BoostNumpy
-    GIT_REPOSITORY https://github.com/ndarray/Boost.NumPy
-    CMAKE_ARGS     -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/extern
-                   -DLIBRARY_TYPE=STATIC
-)
-set(BoostNumpy_INCLUDE_DIRS ${CMAKE_BINARY_DIR}/extern/include)
-set(BoostNumpy_LIBRARY_DIRS ${CMAKE_BINARY_DIR}/extern/lib)
-set(BoostNumpy_LIBRARIES -lboost_numpy)
-
+# Compile boost packages to match the specific system environment
+include(BuildBoost)
+include(BuildBoostNumpy)
 
 # Define include and library directories
 include_directories(
-  ${GSL_INCLUDE_DIRS}
-  ${PYTHON_INCLUDE_DIRS}
   ${Boost_INCLUDE_DIRS}
   ${BoostNumpy_INCLUDE_DIRS}
+  ${GSL_INCLUDE_DIRS}
+  ${PYTHON_INCLUDE_DIRS}
 )
-link_directories(${BoostNumpy_LIBRARY_DIRS} ${GSL_LIBRARY_DIRS})
+link_directories(${BoostNumpy_LIBRARY_DIRS} ${Boost_LIBRARY_DIRS}  ${GSL_LIBRARY_DIRS})
 
 # Compilation flags
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
@@ -45,7 +35,6 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 else()
   set(CMAKE_CXX_FLAGS "-O3 -fomit-frame-pointer -fno-common -fPIC -fopenmp")
 endif()
-
 
 # Build the tools module
 add_library(tools SHARED cosmicpy/cxx/tools.cpp cosmicpy/cxx/besselwindow.cpp)
