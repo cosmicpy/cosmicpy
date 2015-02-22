@@ -2,12 +2,18 @@ language: python
 python:
   - "2.7"
 
+env:
+  global:
+  - OMP_NUM_THREADS 4
+
 sudo: false
 
 cache:
   directories:
   - $HOME/miniconda
   - $HOME/build/cosmicpy/doc/build
+  - $HOME/build/cosmicpy/build/Boost
+  - $HOME/build/cosmicpy/build/GSL
 
 # command to install dependencies
 install: 
@@ -21,7 +27,7 @@ install:
   - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION pip
   - source activate test-environment
   - conda install --yes numpy=1.9
-  - conda install --yes scipy matplotlib Sphinx=1.2.2 Pygments    
+  - conda install --yes scipy matplotlib Sphinx=1.2.2 Pygments ipython
   - pip install sphinx-bootstrap-theme sphinxcontrib-napoleon sphinxcontrib-bibtex
 
   - python setup.py build
