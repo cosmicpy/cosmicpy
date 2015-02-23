@@ -17,7 +17,7 @@ class build_py(_build_py):
         _build_py.run(self)
 
 setup(name='cosmicpy',
-      version='0.1',
+      version='0.1.1',
       requires=['numpy', 'scipy', 'matplotlib'],
       description='An interactive python package for cosmology and parameter forecasts',
       author='Francois Lanusse, Anais Rassat',
