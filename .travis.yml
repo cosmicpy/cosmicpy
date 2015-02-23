@@ -7,15 +7,26 @@ branches:
   only:
     - master
 
+sudo: false
+
+cache:
+  directories:
+  - $HOME/build/cosmicpy/cosmicpy/build/extern
+  - $HOME/build/cosmicpy/cosmicpy/build/GSL
+  - $HOME/build/cosmicpy/cosmicpy/build/Boost
+
 env:
   global:
   - OMP_NUM_THREADS 8
   - secure: PK7hooC3B0me1ABWfR7oUy6np/G0GorCGih00l87hc6AXuYFS347O0UCH2g5mlaEo5AS/R8S8CWU9pA+LFBmbqqg5Em3vg/NvXhuMHq8UgwoQBfIj+l2n1bSO4+7Vz2YwP7oUGPl4t1ACVVgQEGnt9Cp7xDjUoe3VVO5bzpu89s=
 
-sudo: false
-
 before_install:
   - openssl aes-256-cbc -K $encrypted_cb2a50c2b05b_key -iv $encrypted_cb2a50c2b05b_iv -in .travis.key.enc -out id_rsa_travis -d
+  - openssl aes-256-cbc -k "$DEPLOY_KEY_SECRET" -in id_rsa_travis.enc -d -a -out id_rsa_travis
+  - chmod 600 id_rsa_travis
+  - eval `ssh-agent -s`
+  - ssh-add ./id_rsa_travis
+  - chmod 755 ./.deploy_doc.sh
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 
@@ -34,17 +45,7 @@ install:
   - python setup.py build
 
 script:
-  - cd doc
-  - travis_wait make html
+  - (cd doc; travis_wait make html)
 
 after_success:
-  - openssl aes-256-cbc -k "$DEPLOY_KEY_SECRET" -in id_rsa_travis.enc -d -a -out id_rsa_travis
-  - chmod 600 id_rsa_travis
-  - ssh-add ./id_rsa_travis
-  - cd $HOME/build/cosmicpy/cosmicpy/doc/build/html
-  - git init
-  - git config user.name "CosmicPy Travis CI Worker"
-  - git config user.email "travis@cosmicpy.github.io"
-  - git add .
-  - git commit -m "Deployed documentation"
-  - git push --force --quiet git@github.com:cosmicpy/cosmicpy.github.io.git > /dev/null 2>&1
+  - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && ./.deploy_doc.sh || false'
