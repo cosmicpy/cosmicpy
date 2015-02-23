@@ -13,8 +13,7 @@ Here are some of the features of CosmicPy:
 * Completely open package, with collaborative development in mind
 * Extensive documentation of the Python code and detailed tutorials
 * Tomographic angular power spectra
-* Spherical Fourier-Bessel power spectra, with fast Bessel computation through a
-C++ library
+* Spherical Fourier-Bessel power spectra, with fast Bessel computation through a C++ library
 * Tomographic and Spherical Fourier-Bessel Fisher matrices for galaxy clustering
 
 .. image:: _images/BAO.png
