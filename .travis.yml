@@ -37,4 +37,4 @@ install:
 # command to run tests, e.g. python setup.py test
 script:
   - cd doc
-  - make html
+  - travis_wait make html
