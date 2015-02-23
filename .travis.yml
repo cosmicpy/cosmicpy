@@ -21,11 +21,11 @@ env:
   - secure: PK7hooC3B0me1ABWfR7oUy6np/G0GorCGih00l87hc6AXuYFS347O0UCH2g5mlaEo5AS/R8S8CWU9pA+LFBmbqqg5Em3vg/NvXhuMHq8UgwoQBfIj+l2n1bSO4+7Vz2YwP7oUGPl4t1ACVVgQEGnt9Cp7xDjUoe3VVO5bzpu89s=
 
 before_install:
-  - openssl aes-256-cbc -K $encrypted_cb2a50c2b05b_key -iv $encrypted_cb2a50c2b05b_iv -in .travis.key.enc -out id_rsa_travis.enc -d
-  - openssl rsa -in id_rsa_travis.enc -out id_rsa_travis -passin pass:$DEPLOY_KEY_SECRET
-  - chmod 600 id_rsa_travis
+  - openssl aes-256-cbc -K $encrypted_cb2a50c2b05b_key -iv $encrypted_cb2a50c2b05b_iv -in .travis.key.enc -out id_rsa_travis -d
+  - openssl rsa -in id_rsa_travis -out id_rsa_travis_dec -passin pass:$DEPLOY_KEY_SECRET
+  - chmod 600 id_rsa_travis_dec
   - eval `ssh-agent -s`
-  - ssh-add ./id_rsa_travis
+  - ssh-add ./id_rsa_travis_dec
   - chmod 755 ./.deploy_doc.sh
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
