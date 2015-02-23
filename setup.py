@@ -2,32 +2,32 @@
 # Copyright (c) 2014-2015, CosmicPy Developers
 # Licensed under CeCILL 2.1 - see LICENSE.rst
 
-from distutils.command.build_py import build_py as _build_py
+from distutils.command.build import build as _build
 from distutils.core import setup
 from subprocess import call
 import os
 
 
-class build_py(_build_py):
+class build(_build):
     """Specialized Python source builder."""
     def run(self):
         call(["mkdir", "-p", "build"])
         call(["cmake", "-H.", "-Bbuild"])
         call(["make", "-Cbuild", "install"])
-        _build_py.run(self)
+        _build.run(self)
 
 setup(name='cosmicpy',
-      version='0.1.1',
+      version='0.1.2',
       requires=['numpy', 'scipy', 'matplotlib'],
+      install_requires=['numpy', 'scipy', 'matplotlib'],
       description='An interactive python package for cosmology and parameter forecasts',
       author='Francois Lanusse, Anais Rassat',
       author_email='francois.lanusse@cea.fr',
       url='http://cosmicpy.github.io',
       provides=['cosmicpy'],
       packages=['cosmicpy','cosmicpy.tests'],
-      package_dir={'cosmicpy': 'cosmicpy'},
       package_data={'cosmicpy': ['tools.so']},
-      cmdclass={'build_py': build_py},
+      cmdclass={'build': build},
       license='CeCILL',
       classifiers=[
 	  'Development Status :: 4 - Beta',
