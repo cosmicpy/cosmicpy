@@ -4,14 +4,9 @@ python:
 
 env:
   global:
-  - OMP_NUM_THREADS 4
+  - OMP_NUM_THREADS 8
 
 sudo: false
-
-cache:
-  directories:
-  - $HOME/build/cosmicpy/cosmicpy/doc/build
-  - $HOME/build/cosmicpy/cosmicpy/build/Boost/src/Boost
 
 before_install:
   - "export DISPLAY=:99.0"
