@@ -10,8 +10,8 @@ sudo: false
 
 cache:
   directories:
-  - $HOME/build/cosmicpy/doc/build
-  - $HOME/build/cosmicpy/build/Boost
+  - $HOME/build/cosmicpy/cosmicpy/doc/build
+  - $HOME/build/cosmicpy/cosmicpy/build/Boost
 
 before_install:
   - "export DISPLAY=:99.0"
