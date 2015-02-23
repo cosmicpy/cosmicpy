@@ -22,7 +22,7 @@ env:
 
 before_install:
   - openssl aes-256-cbc -K $encrypted_cb2a50c2b05b_key -iv $encrypted_cb2a50c2b05b_iv -in .travis.key.enc -out id_rsa_travis.enc -d
-  - openssl aes-256-cbc -k "$DEPLOY_KEY_SECRET" -in id_rsa_travis.enc -d -a -out id_rsa_travis
+  - openssl rsa -in id_rsa_travis.enc -out id_rsa_travis -passin pass:$DEPLOY_KEY_SECRET
   - chmod 600 id_rsa_travis
   - eval `ssh-agent -s`
   - ssh-add ./id_rsa_travis
