@@ -3,6 +3,6 @@ An interactive python package for cosmology and parameter forecasts.
 
 To install CosmicPy:
 
-  $ pip install cosmicpy
+    $ pip install cosmicpy
 
 More information on required dependencies here: http://cosmicpy.github.io/install.html
