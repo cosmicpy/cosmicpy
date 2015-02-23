@@ -21,7 +21,7 @@ env:
   - secure: PK7hooC3B0me1ABWfR7oUy6np/G0GorCGih00l87hc6AXuYFS347O0UCH2g5mlaEo5AS/R8S8CWU9pA+LFBmbqqg5Em3vg/NvXhuMHq8UgwoQBfIj+l2n1bSO4+7Vz2YwP7oUGPl4t1ACVVgQEGnt9Cp7xDjUoe3VVO5bzpu89s=
 
 before_install:
-  - openssl aes-256-cbc -K $encrypted_cb2a50c2b05b_key -iv $encrypted_cb2a50c2b05b_iv -in .travis.key.enc -out id_rsa_travis -d
+  - openssl aes-256-cbc -K $encrypted_cb2a50c2b05b_key -iv $encrypted_cb2a50c2b05b_iv -in .travis.key.enc -out id_rsa_travis.enc -d
   - openssl aes-256-cbc -k "$DEPLOY_KEY_SECRET" -in id_rsa_travis.enc -d -a -out id_rsa_travis
   - chmod 600 id_rsa_travis
   - eval `ssh-agent -s`
