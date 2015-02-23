@@ -2,5 +2,5 @@ recursive-include cmake *
 recursive-include cosmicpy/cxx *
 include CMakeLists.txt
 include LICENSE.rst
-include README.md
+include README.rst
 exclude cosmicpy/*.so
