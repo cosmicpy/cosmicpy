@@ -1,10 +1,10 @@
 #!/bin/bash
 
 git clone git@github.com:cosmicpy/cosmicpy.github.io.git
-git config user.name "CosmicPy Travis CI Worker"
-git config user.email "travis@cosmicpy.github.io"
 
 (cd cosmicpy.github.io
+	git config user.name "CosmicPy Travis CI Worker"
+	git config user.email "travis@cosmicpy.github.io"
 	cp -r $HOME/build/cosmicpy/cosmicpy/doc/build/html/* .
 	git add *
 	git commit -m "Deployed documentation from Travis"
