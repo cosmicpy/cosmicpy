@@ -11,9 +11,7 @@ sudo: false
 
 cache:
   directories:
-  - "$HOME/build/cosmicpy/cosmicpy/build/extern"
-  - "$HOME/build/cosmicpy/cosmicpy/build/GSL"
-  - "$HOME/build/cosmicpy/cosmicpy/build/Boost"
+  - "$HOME/build/cosmicpy/cosmicpy/doc/build"
 
 env:
   global:
