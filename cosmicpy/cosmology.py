@@ -443,7 +443,7 @@ class cosmology(object):
 
         .. math::
 
-            \chi(a) = \int_a^1 \frac{da^\prime}{a^\prime H(a^\prime)}
+            \chi(a) =  R_H \int_a^1 \frac{da^\prime}{{a^\prime}^2 E(a^\prime)}
         """
         def dchioverdlna(x):
             xa = exp(x)
@@ -552,7 +552,7 @@ class cosmology(object):
 
         .. math::
 
-            \frac{d \chi}{da}(a) = \frac{R_H}{a^2 \sqrt{E(a)}}
+            \frac{d \chi}{da}(a) = \frac{R_H}{a^2 E(a)}
         """
         return const.rh/(a**2*sqrt(self.Esqr(a)))
 
