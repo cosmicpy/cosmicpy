@@ -25,7 +25,7 @@ if(NOT GSL_FOUND)
    message(STATUS "GSL not found, downloading and compiling from source")
     ExternalProject_Add(GSL
         PREFIX GSL
-        URL http://ftp.igh.cnrs.fr/pub/gnu/gsl/gsl-${GSLVersion}.tar.gz
+        URL ftp://ftp.gnu.org/gnu/gsl/gsl-${GSLVersion}.tar.gz
         URL_MD5 ${GSLMD5}
         CONFIGURE_COMMAND ./configure
                                                             --prefix=${CMAKE_BINARY_DIR}/extern
